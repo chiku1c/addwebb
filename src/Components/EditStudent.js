@@ -7,7 +7,7 @@ import {
     Button,
     Typography,
   } from "@mui/material";
-  import React, { useState } from "react";
+  import React, { useState,useEffect } from "react";
   import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
   import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
   import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -16,11 +16,26 @@ import {
   import FormControlLabel from "@mui/material/FormControlLabel";
   import FormControl from "@mui/material/FormControl";
   import FormLabel from "@mui/material/FormLabel";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { editUser } from "../Redux/Action";
   
   const StudentsEdit = () => {
+    const params=useParams()
+    const dispacth=useDispatch()
     const [value, setValue] = React.useState(null);
     const [gender, setGender] = useState("Male");
   
+
+
+useEffect(() => {
+  dispacth(editUser(params))
+  
+}, [params])
+
+
+
+
     return (
       <div
         style={{
@@ -38,7 +53,7 @@ import {
           justifyContent="center"
         >
           <Grid item xs={12}>
-           <Typography style={{fontSize:'20px',fontWeight:600}}>Edit User</Typography>
+           <Typography style={{fontSize:'20px',fontWeight:600}}>Update User</Typography>
           </Grid>
         </Grid>
   

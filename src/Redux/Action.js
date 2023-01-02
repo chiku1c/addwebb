@@ -14,6 +14,11 @@ const deleteUser = (user) => ({
     type: types.ADD_USER
   })
 
+  const userEdit=()=>({
+    type: types.EDIT_USER
+  })
+
+
 export const lodUser = () => {
   return function (dispacth) {
     axios
@@ -52,3 +57,16 @@ export const delUser = (id) => {
         .catch((err) => console.log(err));
     };
   };
+
+  export const editUser = (id) => {
+    return function (dispacth) {
+      axios
+        .get(`${process.env.REACT_APP_API}/${id}`)
+        .then((resp) => {
+          dispacth(userEdit(resp.data));
+          dispacth(lodUser())
+        })
+        .catch((err) => console.log(err));
+    };
+  };
+
